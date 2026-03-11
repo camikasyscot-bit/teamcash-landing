@@ -372,3 +372,39 @@ if (calcVolume && calcDays && calcVolumeValue && calcDaysValue && calcResult) {
 
 // Init
 applyTranslations();
+// ==========================================
+// 🎯 TRACKERS: PROPELLERADS & GOOGLE ANALYTICS
+// ==========================================
+function trackConversion() {
+  // 1. Avisar a Google Analytics de la conversión
+  if (typeof gtag === 'function') {
+    gtag('event', 'generate_lead', {
+      'event_category': 'conversion',
+      'event_label': 'contacto_manager'
+    });
+  }
+
+  // 2. Avisar a PropellerAds (Atrapar el ref_id de la URL)
+  const urlParams = new URLSearchParams(window.location.search);
+  const refId = urlParams.get('ref_id'); // PropellerAds manda el ID aquí
+  
+  // Si existe el ref_id (vino de un anuncio), enviamos el postback
+  if (refId) {
+    const postbackUrl = `http://ad.propellerads.com/conversion.php?aid=3892618&pid=&tid=152845&visitor_id=${refId}&payout=0`;
+    
+    // Disparamos un píxel invisible sin interrumpir al usuario
+    const pixel = new Image();
+    pixel.src = postbackUrl;
+    console.log('✅ Conversión enviada a PropellerAds:', refId);
+  }
+}
+
+// 3. Conectar el tracker a todos los botones de contacto y al botón del popup de bono
+document.addEventListener('DOMContentLoaded', () => {
+  // Buscamos botones de managers (Telegram, WA, FB) y el botón del popup modal
+  const conversionButtons = document.querySelectorAll('.tc-manager-btn, .bonus-modal button');
+  
+  conversionButtons.forEach(btn => {
+    btn.addEventListener('click', trackConversion);
+  });
+});
