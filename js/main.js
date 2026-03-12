@@ -373,37 +373,43 @@ if (calcVolume && calcDays && calcVolumeValue && calcDaysValue && calcResult) {
 // Init
 applyTranslations();
 // ==========================================
-// 🎯 TRACKERS: PROPELLERADS & GOOGLE ANALYTICS
+// 🎯 TRACKERS INTELIGENTES: PROPELLER & ANALYTICS
 // ==========================================
-function trackConversion() {
-  // 1. Avisar a Google Analytics de la conversión
+function trackConversion(event) {
+  const boton = event.currentTarget;
+  
+  // Detectar de qué red social es el botón
+  let redSocial = "Bono_Popup";
+  if (boton.classList.contains("is-telegram")) redSocial = "Telegram";
+  if (boton.classList.contains("is-whatsapp")) redSocial = "WhatsApp";
+  if (boton.classList.contains("is-facebook")) redSocial = "Facebook";
+
+  // Capturar el enlace exacto (para saber a qué mánager le escribieron)
+  const enlaceDestino = boton.href || "Bono_Reclamado";
+
+  // 1. Avisar a Google Analytics con detalles exactos
   if (typeof gtag === 'function') {
-    gtag('event', 'generate_lead', {
-      'event_category': 'conversion',
-      'event_label': 'contacto_manager'
+    gtag('event', 'clic_contacto', {
+      'event_category': 'conversion_detallada',
+      'event_label': redSocial,
+      'manager_url': enlaceDestino
     });
   }
 
-  // 2. Avisar a PropellerAds (Atrapar el ref_id de la URL)
+  // 2. Avisar a PropellerAds (Mantiene la optimización de la campaña)
   const urlParams = new URLSearchParams(window.location.search);
-  const refId = urlParams.get('ref_id'); // PropellerAds manda el ID aquí
+  const refId = urlParams.get('ref_id');
   
-  // Si existe el ref_id (vino de un anuncio), enviamos el postback
   if (refId) {
     const postbackUrl = `http://ad.propellerads.com/conversion.php?aid=3892618&pid=&tid=152845&visitor_id=${refId}&payout=0`;
-    
-    // Disparamos un píxel invisible sin interrumpir al usuario
     const pixel = new Image();
     pixel.src = postbackUrl;
-    console.log('✅ Conversión enviada a PropellerAds:', refId);
   }
 }
 
-// 3. Conectar el tracker a todos los botones de contacto y al botón del popup de bono
+// 3. Conectar el tracker a todos los botones
 document.addEventListener('DOMContentLoaded', () => {
-  // Buscamos botones de managers (Telegram, WA, FB) y el botón del popup modal
   const conversionButtons = document.querySelectorAll('.tc-manager-btn, .bonus-modal button');
-  
   conversionButtons.forEach(btn => {
     btn.addEventListener('click', trackConversion);
   });
