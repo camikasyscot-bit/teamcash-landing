@@ -44,6 +44,69 @@
     </header>
 
     <main class="tc-main">
+      
+      <style>
+        /* Invierte el orden solo en computadoras (Logo Izquierda, Texto Derecha) */
+        @media (min-width: 981px) {
+          .tc-hero {
+            grid-template-columns: 0.95fr 1.05fr !important; 
+          }
+          .tc-hero-copy {
+            order: 2; /* Pasa el texto a la derecha */
+            padding-left: 2rem;
+          }
+          .tc-hero-art {
+            order: 1; /* Pasa la imagen a la izquierda */
+          }
+        }
+        
+        /* Nuevos Botones en forma de Píldora horizontal */
+        .new-hero-cta {
+          display: block;
+          width: 100%;
+          text-align: center;
+          background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+          color: #020b1e !important;
+          font-weight: 900;
+          font-size: 1.4rem;
+          padding: 1.1rem;
+          border-radius: 50px;
+          text-transform: uppercase;
+          box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+        .new-hero-cta:hover { transform: translateY(-3px) scale(1.02); }
+        
+        .new-social-row {
+          display: flex;
+          gap: 15px;
+          margin-top: 15px;
+          width: 100%;
+        }
+        
+        .new-social-btn {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 0.9rem;
+          border-radius: 50px;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 800;
+          color: #fff;
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+        
+        .btn-tg-new { background: linear-gradient(145deg, #0088cc, #00aaff); box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3); }
+        .btn-wa-new { background: linear-gradient(145deg, #25D366, #128C7E); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+        
+        .new-social-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+        .new-social-btn svg { width: 22px; height: 22px; fill: #fff; }
+      </style>
+
       <section class="tc-hero reveal" id="top">
         <div class="tc-hero-copy">
           <h1>
@@ -52,24 +115,21 @@
           <p>
             Conviértete en el proveedor financiero oficial de 1XBET LATAM en tu región. Nuestro ecosistema llave en mano te permite procesar pagos y retiros con total libertad y rentabilidad comprobada.
           </p>
-          <a class="cta" href="#register">Postularme como Agente</a>
-          <div class="hero-contact" aria-label="Canales de ayuda rápida">
-            <a class="hero-contact-btn hero-contact-tg tc-manager-btn is-telegram" href="https://t.me/laura1xbetmel" target="_blank" rel="noopener noreferrer" aria-label="Chat en Telegram">
-              <span class="hero-contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img" focusable="false">
-                  <path d="M20.7 4.1L3.6 10.8c-.9.4-.8 1.6.2 1.8l4.4 1.3 1.6 4.7c.3.9 1.5 1.1 2 .3l2.5-3.9 4.3 3.1c.8.6 1.9.1 2.1-.9l2.2-11.1c.2-1-.8-1.9-1.8-1.5zM10 14.4l-.7-2.1 7.5-4.8-6.8 6.9z"></path>
-                </svg>
-              </span>
+          
+          <a class="new-hero-cta" href="#register">🔥 Postularme como Agente</a>
+          
+          <div class="new-social-row" aria-label="Canales de ayuda rápida">
+            <a class="new-social-btn btn-tg-new tc-manager-btn is-telegram" href="https://t.me/laura1xbetmel" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M20.7 4.1L3.6 10.8c-.9.4-.8 1.6.2 1.8l4.4 1.3 1.6 4.7c.3.9 1.5 1.1 2 .3l2.5-3.9 4.3 3.1c.8.6 1.9.1 2.1-.9l2.2-11.1c.2-1-.8-1.9-1.8-1.5zM10 14.4l-.7-2.1 7.5-4.8-6.8 6.9z"></path></svg>
+              TELEGRAM
             </a>
-            <a class="hero-contact-btn hero-contact-wa tc-manager-btn is-whatsapp" href="https://wa.me/+527441925921" target="_blank" rel="noopener noreferrer" aria-label="Chat en WhatsApp">
-              <span class="hero-contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img" focusable="false">
-                  <path d="M20.5 11.7c0 4.8-3.9 8.7-8.7 8.7-1.5 0-3-.4-4.2-1.1l-4 1.3 1.3-3.9a8.6 8.6 0 01-1.1-4.3c0-4.8 3.9-8.7 8.7-8.7s8.7 3.9 8.7 8.7zm-5.1 2.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.6.1-.2-.1-1.1-.4-2-1.2-.7-.6-1.2-1.4-1.4-1.6-.1-.2 0-.4.1-.5.1-.1.2-.3.3-.4.1-.1 0-.3 0-.4 0-.1-.5-1.3-.7-1.7-.2-.4-.4-.4-.5-.4h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.4.6.3 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.3-.2-.5-.3z"></path>
-                </svg>
-              </span>
+            <a class="new-social-btn btn-wa-new tc-manager-btn is-whatsapp" href="https://wa.me/+527441925921" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M20.5 11.7c0 4.8-3.9 8.7-8.7 8.7-1.5 0-3-.4-4.2-1.1l-4 1.3 1.3-3.9a8.6 8.6 0 01-1.1-4.3c0-4.8 3.9-8.7 8.7-8.7s8.7 3.9 8.7 8.7zm-5.1 2.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.6.1-.2-.1-1.1-.4-2-1.2-.7-.6-1.2-1.4-1.4-1.6-.1-.2 0-.4.1-.5.1-.1.2-.3.3-.4.1-.1 0-.3 0-.4 0-.1-.5-1.3-.7-1.7-.2-.4-.4-.4-.5-.4h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.4.6.3 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.3-.2-.5-.3z"></path></svg>
+              WHATSAPP
             </a>
           </div>
         </div>
+        
         <div class="tc-hero-art">
           <div class="hero-motion">
             <span class="float-item ball ball-1"><span class="float-inner">💎</span></span>
